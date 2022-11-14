@@ -36,7 +36,7 @@ obj2.func4("lee");
 #4 firstName =  lee name =  undefined
 ```
 
-화살표 함수와 일반 함수의 결과값이 다른 이유?????
+[화살표 함수와 일반 함수의 결과값이 다른 이유?????](https://github.com/leeks9653/TIL/blob/main/arrow-function/arrow-function.md)
 
 <br/>
 
