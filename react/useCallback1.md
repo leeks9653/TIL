@@ -75,7 +75,7 @@ export default App;
 ```
 
 이유가 뭘까 고민하던 도중 keyboardEvent 함수가 re render 될때마다 새롭게 다시 생성될 것 같다는 생각이 들었다.  
-그래서 함수가 딱 한번만 생성되고 더 이상 생성되지 않게 하기 위해 useCallback을 함수에 씌워보았다.
+그래서 함수가 딱 한번만 생성되고 더 이상 생성되지 않게 하기 위해 useCallback을 함수에 씌워보았다.   
 간단하게 해결 되었다.
 
 ```javascript
