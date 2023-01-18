@@ -103,3 +103,24 @@ MinorGC = 가비지 컬렉터
 
 프레임차트를 보고 시간이 오래 걸리는 코드를 수정하여 렌더링 성능을 증가시킬 수 있음
 ```
+
+### 애니메이션 최적화
+
+```
+Reflow, Repaint
+
+Reflow
+Critical Rendering Path의 모든 단계를 실행 (width, height, position, padding, margin, border, display, float, font, overflow 등등)
+
+Repaint
+Critical Rendering Path에서 Layout 단계를 건너뛰고 실행 (background, 색상, outline 등등)
+
+GPU
+Critical Rendering Path에서 Layout, Paint 단계를 건너뛰고 실행 (transform, opacity)
+```
+
+### 컴포넌트 Lazy Loading
+
+### 컴포넌트 Preloading
+
+### 이미지 Preloading
