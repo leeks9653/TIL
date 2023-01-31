@@ -148,3 +148,33 @@ src = "이미지의 주소" 가 읽혀 이미지가 다운받아진 상태에서
 캐시 속성
 - max-age = 100  => 100초동안 캐싱한다.
 ```
+
+### IntersectionObserver를 활용한 이미지 로딩최적화
+
+```
+IntersectionObserver를 활용하여 화면에 이미지 영역이 보여질 시점에 이미지를 로드한다.
+
+<img data-src="이미지경로">
+위 처럼 src 대신 data-src를 넣어서 영역만 잡게 한 뒤 isIntersecting일 경우에 dataset의 src를 이미지의 src값에 넣어준다
+
+image.src = image.dataset.src
+```
+
+### 이미지 사이즈 최적화2
+
+```
+이미지 포맷
+ png, jpg, webp
+
+squoosh.app에서 webp형식의 이미지로 변환 가능
+
+webp는 지원하지 않는 브라우저도 존재
+
+picture태그를 활용하여 webp와 다른 포맷의 이미지를 분기처리할 수 있음
+
+<picture>
+  <source srcset="이미지경로" type"image/webp" >
+  <img src="대체이미지경로" alt="">
+</picture>
+
+```
