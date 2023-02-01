@@ -176,5 +176,27 @@ picture태그를 활용하여 webp와 다른 포맷의 이미지를 분기처리
   <source srcset="이미지경로" type"image/webp" >
   <img src="대체이미지경로" alt="">
 </picture>
+```
 
+### 웹폰트 최적화
+
+```
+웹 폰트의 문제점
+
+FOUT(Flash of Unstyled Text)
+기본 폰트스타일에서 폰트 스타일이 적용되면서 깜빡이는 현상
+FOIT(Flash of Invisible Text)
+아무것도 없던 화면에서 스타일이 적용된 폰트가 나타나는 현상
+
+최적화 방법
+
+1. 폰트 적용 시점 컨트롤
+2. 폰트 사이즈 줄이기
+
+font-display 속성을 사용함
+- auto
+- block(FOIT)
+- swap(FOUT)
+- optional(FOIT)
+- fallback(FOIT)
 ```
