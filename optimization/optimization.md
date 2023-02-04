@@ -187,11 +187,15 @@ FOUT(Flash of Unstyled Text)
 기본 폰트스타일에서 폰트 스타일이 적용되면서 깜빡이는 현상
 FOIT(Flash of Invisible Text)
 아무것도 없던 화면에서 스타일이 적용된 폰트가 나타나는 현상
+```
 
 최적화 방법
 
 1. 폰트 적용 시점 컨트롤
 2. 폰트 사이즈 줄이기
+
+```
+폰트 적용 시점 컨트롤
 
 font-display 속성을 사용함
 - auto
@@ -199,4 +203,78 @@ font-display 속성을 사용함
 - swap(FOUT)
 - optional(FOIT)
 - fallback(FOIT)
+```
+
+```
+폰트 사이즈 줄이기
+
+파일 크키
+EOT > TTF/OTF > WOFF > WOFF2
+
+@font-face {
+  font-family : "폰트이름";
+  src : url("폰트 경로") fotmat("포맷 형식"), url("폰트 경로") fotmat("포맷 형식");
+  // 첫 번째 폰트가 안될 경우 콤마 이후의 폰트가 적용됨.
+
+  src : local("폰트명"), url("폰트 경로") fotmat("포맷 형식");
+  // local을 사용하게 되면 내 컴퓨터에 해당 폰트명이 있을 경우 폰트를 다운로드 받지 않고 적용됨.
+}
+
+Subset
+
+일부 단어들에만 적용되는 폰트스타일은 해당 단어들만 폰트가 적용될 수 있게 해서 폰트파일의 사이즈를 줄일 수 있다.
+
+
+Unicode-range
+
+@font-face {
+  // ...폰트 스타일
+  unicode-range : "단어의 유니코드"
+}
+
+해당 단어가 unicode-range에 포함되지 않는 경우 폰트를 다운로드 받지 않음.
+
+Data-uri
+
+폰트의 값을 직접 font-face의 url값에 넣음
+
+@font-face {
+  font-family : "폰트이름";
+  src : url("data-uri값") fotmat("포맷 형식")
+}
+
+Preload
+
+webpack을 통하여 폰트를 미리 다운받을 수 있게 한다.
+preload가 적용이 되면 perfomance탭에서 폰트파일이 먼저 다운로드가 진행되는 것을 확인할 수 있음.
+```
+
+### 캐시최적화
+
+- 메모리 캐시
+  - RAM
+- 디스크 캐시
+  - file
+    네트워크 탭 -> size에서 확인 가능
+
+```
+캐시 option
+
+no-cache: 캐시를 사용하기 전에 서버에서 검사 후, 사용 결정 (기존의 데이터를 사용할 수 있으면 기존의 데이터를 사용하고 데이터가 변경이 됐으면 변경된 데이터를 사용)
+no-store: 캐시 사용 안함. (max-age: 0과 같다.)
+public: 모든 환경에서 캐시 사용가능
+private: 브라우저 환경에서만 캐시 사용, 외부 캐시 서버에서는 사용 불가
+max-age: 캐시의 유효기간
+
+브라우저에서 요청을 보낸 파일에 캐시를 적용하고 싶으면 서버에서 적용을 해서 내려줘야함.
+해당 데이터가 캐시가 만료되면 다음 동일데이터 요청을 보낼 때 해당 데이터가 변경이 되었는지를 확인을 함.
+동일 데이터일 경우 304 Not Modified(size 탭에서도 용량이 작은 것을 확인 가능), 아닐 경우 다운로드를 받음.
+
+데이터가 변경이 되었는지 ETag를 이용하여 확인 가능.
+```
+
+### 사용하지 않는 css 제거
+
+```
+Pergecss 실행으로 build된 css파일에서 사용이 되지 않는 css를 제거한다.
 ```
