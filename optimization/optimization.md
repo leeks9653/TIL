@@ -278,3 +278,44 @@ max-age: 캐시의 유효기간
 ```
 Pergecss 실행으로 build된 css파일에서 사용이 되지 않는 css를 제거한다.
 ```
+
+### Layout Shift
+
+```
+원래 위치하고 있던 곳에서 다른 데이터의 로드로 인해 아래로 밀려나는 현상 -> layout, paint단계가 다시 실행됨. -> 효율이 떨어지고 유저가 다른 데이터를 클릭할 수 있는 상황이 발생함.
+
+원인
+
+- 사이즈가 정해져 있지 않은 이미지
+- 사이즈가 정해져 있지 않은 광고
+- 동적으로 삽인된 콘텐츠
+- Web font
+```
+
+### Redux/CreateSelector
+
+```
+const {array} = useSelector((rootState) => ({
+  array : rootState.type.type === true ?
+    rootState.array.data.filter((data) => data.state === true) :
+    rootState.array.data.filter((data) => data.state === false)
+}),shallowEqual);
+
+useSelector를 통해서 type이 true일 때 type이 true인 데이터만 필터링해서 사용하려고 한다.
+
+하지만 filter함수는 새로운 함수를 리턴하므로 리덕스의 데이터가 변경되는 순간 무조건 렌더링이 된다.
+
+그때 사용할 수 있는 방법이 createSelector이다.
+
+npm install reselect
+reselect 라이브러리를 받은 후
+
+import {createSelector} from "reselect";
+를 실행하여 createSelector를 가져온다.
+
+const selectData = createSelector(
+  [(rootState) => state.type.type, ]
+
+  , )
+
+```
