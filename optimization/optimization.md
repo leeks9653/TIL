@@ -324,7 +324,7 @@ const selectData = createSelector(
     (rootState) => rootState.array.data
   ],
   (type, data) => type ?  data.filter((data) => data.state === true) : data.filter((data) => data.state === false)
-  // 함수의 매개변수애는 위에 배열에 선언한 함수 순서대로 값이 할당된다.
+  // 함수의 매개변수에는 위에 배열에 선언한 함수 순서대로 값이 할당된다.
 );
 createSelector가 이전값을 캐시를 해서 매개변수에 값이 동일하게 들어오게 되면 이전에 캐시해두었던 데이터를 사용한다.
 
