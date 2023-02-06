@@ -192,7 +192,6 @@ FOIT(Flash of Invisible Text)
 최적화 방법
 
 1. 폰트 적용 시점 컨트롤
-2. 폰트 사이즈 줄이기
 
 ```
 폰트 적용 시점 컨트롤
@@ -204,6 +203,8 @@ font-display 속성을 사용함
 - optional(FOIT)
 - fallback(FOIT)
 ```
+
+2. 폰트 사이즈 줄이기
 
 ```
 폰트 사이즈 줄이기
@@ -306,16 +307,28 @@ useSelector를 통해서 type이 true일 때 type이 true인 데이터만 필터
 하지만 filter함수는 새로운 함수를 리턴하므로 리덕스의 데이터가 변경되는 순간 무조건 렌더링이 된다.
 
 그때 사용할 수 있는 방법이 createSelector이다.
+```
 
+```
 npm install reselect
-reselect 라이브러리를 받은 후
+```
+
+```
+createSelector 적용
 
 import {createSelector} from "reselect";
-를 실행하여 createSelector를 가져온다.
 
 const selectData = createSelector(
-  [(rootState) => state.type.type, ]
+  [
+    (rootState) => rootState.type.type,
+    (rootState) => rootState.array.data
+  ],
+  (type, data) => type ?  data.filter((data) => data.state === true) : data.filter((data) => data.state === false)
+  // 함수의 매개변수애는 위에 배열에 선언한 함수 순서대로 값이 할당된다.
+);
+createSelector가 이전값을 캐시를 해서 매개변수에 값이 동일하게 들어오게 되면 이전에 캐시해두었던 데이터를 사용한다.
 
-  , )
+const array = useSelector(selectData);
 
+createSelector를 선언하는 폴더나 파일을 생성해서 분리하는 것이 좋을 것 같다.
 ```
